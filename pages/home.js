@@ -1,11 +1,13 @@
-import * as React from 'react';
-import {View} from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import Map from './map'
-export default function Home() {
 
-  return (
-      <View>
-        <Map />
-      </View>
-  );
+const Home = () => {
+    return (
+        <View>
+          <Map/>
+        </View>
+    );
 }
+
+export default Home;

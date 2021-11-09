@@ -1,16 +1,10 @@
 import React from 'react';
-import { SafeAreaView, Text, View, Button, StyleSheet, TextInput } from 'react-native';
-import axios from 'axios';
-
-const styles = StyleSheet.create({
-  backgroundColor: {
-    backgroundColor: 'grey',
-  }
-})
+import { SafeAreaView, Text, View, Button, StyleSheet, TextInput, Image } from 'react-native';
+import { LinearGradient } from "expo-linear-gradient";
 
 class Login extends React.Component {
 
-  state = { 
+  state = {
     email: '',
     password: ''
   }
@@ -24,34 +18,43 @@ class Login extends React.Component {
   }
 
   login = (email, password) => {
-
     const Login = {email, password};
-     
     this.props.navigation.navigate('Home')
-    /*axios.post('connexion route' , Login)
-    .then((response) => {
-        console.log(response.data.data.token);
-    })*/
-  
   }
 
 
   render(){
-
     return (
-      <SafeAreaView style={styles.backgroundColor}>
-        <View>
+      <SafeAreaView style={styles.page}>
+        <LinearGradient
+            // Background Linear Gradient
+            colors={['#4bd8da', '#af95c7']}
+            style={styles.background}
+        />
+        <View
+          style={styles.form}
+        >
+        <Image
+          source={require('../assets/logo-transparent.png')}
+          style={styles.logo}
+        />
           <Text>Email</Text>
-          <TextInput 
+          <TextInput
             placeholder="Email"
             onChangeText={this.handleEmail}
           />
-          <Text>Mot de passe</Text>
-          <TextInput 
-            secureTextEntry={true} 
-            placeholder="Mot de passe" 
-            onChangeText={ this.handlePassword}/>
-          <Button title="Se connecter" onPress={() => this.login(this.state.email, this.state.password)} />
+          <Text style={styles.pw}>Mot de passe</Text>
+          <TextInput
+            secureTextEntry={true}
+            placeholder="Mot de passe"
+            onChangeText={this.handlePassword}
+            style={styles.input}
+            />
+          <Button
+            title="Se connecter"
+            onPress={() => this.login(this.state.email, this.state.password)}
+            color='white'
+          />
         </View>
       </SafeAreaView>
     );
@@ -59,3 +62,33 @@ class Login extends React.Component {
 }
 
 export default Login;
+
+const styles = StyleSheet.create({
+  page: {
+    height: "100%"
+  },
+  logo: {
+    width: 300,
+    height: 300
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: "100%"
+  },
+  form: {
+    justifyContent: 'center', //Centered vertically
+    alignItems: 'center', // Centered horizontally
+    flex:1,
+    marginHorizontal: 30,
+    height: 30
+  },
+  pw: {
+    paddingTop: 24,
+  },
+  input: {
+    paddingBottom: 24,
+  }
+})

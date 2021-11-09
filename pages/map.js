@@ -28,7 +28,7 @@ const list = () => {
 };
 
 const Map = () => {
-  const [ region, setRegion ] = React.useState({
+  const [ region, setRegion ] = useState({
     latitude: 43.2700,
     longitude: 5.3955,
     latitudeDelta: 0.0111,
