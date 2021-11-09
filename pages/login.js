@@ -22,7 +22,6 @@ class Login extends React.Component {
     this.props.navigation.navigate('Home')
   }
 
-
   render(){
     return (
       <SafeAreaView style={styles.page}>
@@ -38,23 +37,35 @@ class Login extends React.Component {
           source={require('../assets/logo-transparent.png')}
           style={styles.logo}
         />
-          <Text>Email</Text>
+          <Text style={styles.email}>Email</Text>
           <TextInput
             placeholder="Email"
             onChangeText={this.handleEmail}
+            style={{borderWidth: 1, backgroundColor: 'white', borderRadius: 3, width: 200, marginTop: 12, textAlign: 'center', paddingVertical: 6}}
           />
           <Text style={styles.pw}>Mot de passe</Text>
           <TextInput
             secureTextEntry={true}
             placeholder="Mot de passe"
             onChangeText={this.handlePassword}
-            style={styles.input}
+            style={{borderWidth: 1, backgroundColor: 'white', borderRadius: 3, width: 200, marginTop: 12, marginBottom: 44, textAlign: 'center', paddingVertical: 6}}
             />
           <Button
             title="Se connecter"
             onPress={() => this.login(this.state.email, this.state.password)}
             color='white'
           />
+        </View>
+        <View style={styles.footer}>
+        <Text>
+          Contact
+        </Text>
+        <Text>
+          Mentions Légales
+        </Text>
+        <Text>
+          Nous rejoindre
+        </Text>
         </View>
       </SafeAreaView>
     );
@@ -65,7 +76,8 @@ export default Login;
 
 const styles = StyleSheet.create({
   page: {
-    height: "100%"
+    height: "100%",
+    overflow: "hidden"
   },
   logo: {
     width: 300,
@@ -85,10 +97,19 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     height: 30
   },
+  email: {
+    color: 'white'
+  },
   pw: {
     paddingTop: 24,
+    color: 'white',
   },
   input: {
     paddingBottom: 24,
+  },
+  footer: {
+    backgroundColor: '#af95c7',
+    height: 60,
+    alignItems: 'center',
   }
 })

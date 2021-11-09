@@ -12,13 +12,13 @@ const showMenu = () => {
 const list = () => {
   return lampData.map((item) => {
     return (
-      <Marker 
-      coordinate={{latitude: item.lat, longitude: item.lon}} 
+      <Marker
+      coordinate={{latitude: item.lat, longitude: item.lon}}
       onPress={() => {
         showMenu();
       }}
-      draggable={false} 
-      pinColor="cyan">
+      draggable={false}
+      pinColor="yellow">
         <Callout>
             <Text color='blue'>{item.id}</Text>
         </Callout>
@@ -79,7 +79,6 @@ const Map = () => {
           draggable={false}
           pinColor="cyan"
           // image={locaPin}
-          // style={styles.marker}
           // onPress showMenu
         >
         <Callout>
