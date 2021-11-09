@@ -1,23 +1,11 @@
-import React from 'react';
-import { SafeAreaView, Text, View, StyleSheet } from 'react-native';
+import * as React from 'react';
+import {View} from 'react-native';
+import Map from './map'
+export default function Home() {
 
-const styles = StyleSheet.create({
-  backgroundColor: {
-    backgroundColor: 'grey',
-  }
-})
-class Home extends React.Component {
- 
-  render(){
-
-    return (
-      <SafeAreaView style={styles.backgroundColor}>
-        <View>
-          <Text>Home</Text>
-        </View>
-      </SafeAreaView>
-    );
-  }
+  return (
+      <View>
+        <Map />
+      </View>
+  );
 }
-
-export default Home;
