@@ -21,7 +21,8 @@
     "twrnc": "^2.0.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "constants": "^0.0.2"
   },
   "private": true
 }

@@ -1,32 +1,50 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
-import MapView from 'react-native-maps';
+import {View, StyleSheet, Dimensions, Platform, Text} from 'react-native';
+import MapView, {Marker} from 'react-native-maps';
+
 const Map = () => {
-  const [mapRegion, setmapRegion] = useState({
-    latitude: 43.2969500,
-    longitude: 5.3810700,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  });
+  const [location, setLocation] = useState();
+  const [errorMsg, setErrorMsg] = useState();
+
   useEffect(() => {
     (async () => {
-      let { status } = await  Location.requestForegroundPermissionsAsync();
+      let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
-        setStatus('Permission to access location was denied');
-      } else {
-        console.log('Access granted!!')
-        setStatus(status)
+        setErrorMsg('Permission to access location was denied');
+        return;
       }
 
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
     })();
   }, []);
+
+  let text = 'Waiting..';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
 
   return (
       <View style={styles.container}>
         <MapView
-            style={styles.map}
-            region={mapRegion}
+          style={styles.map}
+          initialRegion={{
+            latitude: 43.2701,
+            longitude: 5.3925,
+            latitudeDelta: 0.0122,
+            longitudeDelta: 0.0021,
+          }}
         />
+        <Marker
+          coordinate={{latitude: 43.2701, longitude: 5.3925}}
+          title={"title"}
+          description={"description"}
+        />
+        <Text
+          style={styles.paragraph}>{text}
+        </Text>
       </View>
   );
 };
@@ -38,5 +56,9 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
+  },
+  paragraph: {
+    fontSize: 18,
+    textAlign: 'center',
   },
 });
