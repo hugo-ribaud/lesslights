@@ -1,5 +1,9 @@
 import React from 'react';
 import { SafeAreaView, Text, View, StyleSheet } from 'react-native';
+import * as FileSystem from 'expo-file-system';
+
+
+const lampData = require('./../data/velodrome.json');
 
 const styles = StyleSheet.create({
   backgroundColor: {
@@ -13,8 +17,11 @@ class Home extends React.Component {
     return (
       <SafeAreaView style={styles.backgroundColor}>
         <View>
-          <Text>Home</Text>
+        {lampData.map((v,index)=>{
+             return <View key={index}><Text> latitude{v.lat} longitude {v.lon}</Text></View>
+        })}
         </View>
+
       </SafeAreaView>
     );
   }
