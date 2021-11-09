@@ -1,21 +1,33 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Dimensions, Platform, Text} from 'react-native';
+import {View, StyleSheet, Dimensions, Platform, Text, Modal, Pressable} from 'react-native';
 import MapView, {Callout, Circle, Marker} from 'react-native-maps';
 import {GooglePlacesAutocomplete} from "react-native-google-places-autocomplete";
 
+import MenuPicker from './../components/menu';
+
 const lampData = require('./../data/velodrome.json');
 
-const showMenu = () => {
-  alert('showMenu');
+var visible = false;
+
+const showMenu = (id) => {
+  //alert(id);
+  setModalVisible(true)  
 }
 
 const list = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   return lampData.map((item) => {
     return (
+      <>
       <Marker 
       coordinate={{latitude: item.lat, longitude: item.lon}} 
       onPress={() => {
-        showMenu();
+
+        //showMenu(item.id);
+        //MenuPicker(item.id);
+
+        setModalVisible(true)
       }}
       draggable={false} 
       pinColor="cyan">
@@ -23,6 +35,28 @@ const list = () => {
             <Text color='blue'>{item.id}</Text>
         </Callout>
       </Marker>
+      <Modal
+      animationType="slide"
+      transparent={true}
+      visible={modalVisible}
+      onRequestClose={() => {
+        Alert.alert("Modal has been closed.");
+        setModalVisible(!modalVisible);
+      }}
+    >
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <Text style={styles.modalText}>Hello World!</Text>
+          <Pressable
+            style={[styles.button, styles.buttonClose]}
+            onPress={() => setModalVisible(!modalVisible)}
+          >
+            <Text style={styles.textStyle}>Hide Modal</Text>
+          </Pressable>
+        </View>
+      </View>
+    </Modal>
+    </>
     );
   });
 };
@@ -87,9 +121,6 @@ const Map = () => {
         </Callout>
         </Marker>
         {list()}
-        <Circle
-          center={{latitude: 43.2700, longitude: 5.3955,}}
-          radius={150}/>
         </MapView>
       </View>
   );
@@ -100,4 +131,45 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
 });

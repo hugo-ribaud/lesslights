@@ -54,6 +54,7 @@ class Login extends React.Component {
             title="Se connecter"
             onPress={() => this.login(this.state.email, this.state.password)}
             color='white'
+            
           />
         </View>
       </SafeAreaView>
@@ -90,5 +91,6 @@ const styles = StyleSheet.create({
   },
   input: {
     paddingBottom: 24,
+
   }
 })
