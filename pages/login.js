@@ -24,7 +24,7 @@ class Login extends React.Component {
 
   render(){
     return (
-      <SafeAreaView style={styles.page}>
+      <View style={styles.page}>
         <LinearGradient
             // Background Linear Gradient
             colors={['#4bd8da', '#af95c7']}
@@ -56,18 +56,7 @@ class Login extends React.Component {
             color='white'
           />
         </View>
-        <View style={styles.footer}>
-        <Text>
-          Contact
-        </Text>
-        <Text>
-          Mentions Légales
-        </Text>
-        <Text>
-          Nous rejoindre
-        </Text>
-        </View>
-      </SafeAreaView>
+      </View>
     );
   }
 }
@@ -106,10 +95,5 @@ const styles = StyleSheet.create({
   },
   input: {
     paddingBottom: 24,
-  },
-  footer: {
-    backgroundColor: '#af95c7',
-    height: 60,
-    alignItems: 'center',
   }
 })
